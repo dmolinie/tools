@@ -1,0 +1,11 @@
+# Python
+__pycache__
+*.pyc
+*.out
+*.csv
+*.tar.xz
+*.pdf
+*.egg-info
+*.git_cmds
+dist*/
+

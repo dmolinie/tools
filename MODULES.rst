@@ -25,6 +25,15 @@ General purpose functions to handle files, text, Markdown, BibTeX, etc.
 * ``strip_str``  
         Keep only letters, numbers, spaces, hyphens and apostrophes in a string.
 
+* ``add_str_suffix``  
+        Append a string to another, while keeping the any trailing '\n'.
+
+* ``str_to_anchor_name``  
+        Normalize a string to a standard anchor name.
+
+* ``anchor_name_to_str``  
+        Take an anchor and convert it to a human-readable string.
+
 * ``read_file``  
         Read and load the content of a file.
 
@@ -34,11 +43,8 @@ General purpose functions to handle files, text, Markdown, BibTeX, etc.
 ..
   _markdown.py.
 
-* ``str_to_html_anchor_name``  
-        Normalize a string to a standard HTML anchor name.
-
 * ``create_html_anchor``  
-        Take the HTML anchor name and wrap it into an anchor element.
+        Take an anchor name and wrap it into an HTML anchor element.
 
 * ``is_html_anchor``  
         Check that a string is an HTML anchor.
@@ -52,10 +58,10 @@ General purpose functions to handle files, text, Markdown, BibTeX, etc.
 * ``create_md_toc_entry``  
         Take a set of (anchor, title) and rewrite into a Markdown TOC entry.
 
-* ``write_mdfile_with_toc``  
+* ``write_md_with_toc``  
         Write a text and its TOC in a Markdown file.
 
-* ``add_toc_to_mdfile``  
+* ``add_toc_to_md``  
         Open a Markdown file, add HTML anchors to above sections, build the new TOC and write the updated file (TOC, text and anchors).
 
 ..

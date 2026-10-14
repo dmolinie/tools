@@ -199,7 +199,7 @@ def anchor_name_to_str(name):
     """ Take an anchor and convert it to a human-readable string
 
     Take the name of an anchor (HTML, Pandoc), typically obtained with
-    the `str_to_anchor_name` function, and convert it into a regular,
+    the ``str_to_anchor_name`` function, and convert it into a regular,
     human-readable string, by replacing the hyphens by regular spaces
     and by capitalizing it.
 

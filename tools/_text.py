@@ -9,14 +9,16 @@ License: GPLv3
 """
 
 __all__ = [
-    'strip_str_punctuation', 'strip_str_symbols', 'strip_str_accents',
-    'strip_str', 'read_file', 'write_file']
+    'strip_str_punctuation', 'strip_str_symbols',
+    'strip_str_accents', 'strip_str', 'add_str_suffix',
+    'str_to_anchor_name', 'anchor_name_to_str',
+    'read_file', 'write_file']
 
 import unicodedata
 
 
 ##############################################################################
-##                        String Handling Functions                         ##
+##                      String Manipulation Functions                       ##
 ##############################################################################
 #https://www.unicode.org/reports/tr44/tr44-34.html#General_Category_Values
 
@@ -90,7 +92,7 @@ def strip_str(s):
         The string stripped from the punctuation, symbols, etc.
 
     Examples
-    --------    
+    --------
     >>> strip_str("*White-Fang*, Jack London")
     'White-Fang Jack London'
 
@@ -102,8 +104,128 @@ def strip_str(s):
     """
     # 'Lx': letters ; 'Nx': numbers ; 'Zx': spaces
     return ''.join(c for c in s
-        if c in ('-', "'", "’")
-        or unicodedata.category(c)[0] in ('L', 'N', 'Z'))
+        if c in ('-', "'", "’") or unicodedata.category(c)[0] in ('L', 'N', 'Z'))
+
+def add_str_suffix(string, suffix):
+    r""" Append a string to another, while keeping the any trailing '\n'
+
+    Take `string` and append `suffix` to it; if `string` had a trailing
+    breaking line '\n', insert `suffix` just before it, so that the new
+    string is: string + suffix [+ '\n']
+
+    Parameters
+    ----------
+    string : str
+        The base string (left).
+    suffix : str
+        The string to append (right).
+
+    Returns
+    -------
+    string_app : str
+        The string resulting from the concatenation of `string` and
+        `suffix`, with a possible trailing breaking line '\n'.
+
+    Examples
+    --------
+    >>> add_str_suffix('Title', ' {#anchor}')
+    'Title {#anchor}'
+
+    >>> add_str_suffix('Title\n', ' {#anchor}')
+    'Title {#anchor}\n'
+    """
+    if string.endswith('\n'):
+        return string[:-1] + suffix + '\n'
+    return string + suffix
+
+def str_to_anchor_name(string):
+    """ Normalize a string to a standard anchor name
+
+    Take a string, lowercase it and clean it as follows:
+      - replace 'œ' and 'æ' with 'oe' and 'ae';
+      - replace '&' with hyphen '-';
+      - remove the spaces before and after hyphens;
+      - replace spaces ' ' with hyphens '-';
+      - remove the symbols and punctuation;
+      - remove the accents from the accentuated characters.
+    Then, return the stripped string that contains anchor name standard
+    characters only.
+
+    Parameters
+    ----------
+    string : str
+        The string to standardize.
+
+    Returns
+    -------
+    string_std : str
+        The standardized string.
+
+    Examples
+    --------
+    >>> str_to_anchor_name("*White-Fang*, Jack London")
+    'white-fang-jack-london'
+
+    >>> str_to_anchor_name("I love cafés!")
+    'i-love-cafes'
+
+    >>> str_to_anchor_name("« C'est la vie ! » is a French expression.")
+    "c-est-la-vie---is-a-french-expression"
+    """
+    # Lowercase the string
+    string = string.lower()
+    # Replace the apostrophes with hyphens
+    string = string.replace("'", '-')
+    string = string.replace("’", '-')
+    # Split the 'æ' and 'œ' letters
+    string = string.replace('æ', 'ae')
+    string = string.replace('œ', 'oe')
+    # Replace and symbol '&' with an hyphen
+    string = string.replace('&', '-')
+    # Remove the spaces before and after hyphens
+    string = string.replace(' -', '-')
+    string = string.replace('- ', '-')
+    # Replace the spaces with hyphens
+    string = string.replace(' ', '-')
+    # Keep only the letters, numbers and hyphens (+ spaces and apostrophes)
+    string = strip_str(string)
+    # Remove the accents from the accentuated letters
+    string = strip_str_accents(string)
+#    string = string.replace('--', '-')
+    # Remove the leading and trailing hyphens, if any
+    return string.strip('-')
+
+def anchor_name_to_str(name):
+    """ Take an anchor and convert it to a human-readable string
+
+    Take the name of an anchor (HTML, Pandoc), typically obtained with
+    the `str_to_anchor_name` function, and convert it into a regular,
+    human-readable string, by replacing the hyphens by regular spaces
+    and by capitalizing it.
+
+    Parameters
+    ----------
+    name : str
+        The name of the anchor (HTML, Pandoc).
+
+    Returns
+    -------
+    string : str
+        The (more) human-readable string.
+
+    Examples
+    --------
+    >>> print(anc:=str_to_anchor_name("# Presentation of the project"))
+    presentation-of-the-project
+    >>> print(string:=anchor_name_to_str(anc))
+    Presentation of the project
+
+    >>> print(anc:=str_to_anchor_name("I love cafés!"))
+    i-love-cafes
+    >>> print(string:=anchor_name_to_str(anc))
+    'I love cafes'
+    """
+    return name.replace('-', ' ').capitalize()
 
 ##############################################################################
 

@@ -13,60 +13,86 @@ General purpose functions to handle files, text, Markdown, BibTeX, etc.
 ..
   _text.py.
 
-* ``strip_str_punctuation``  
+* ``strip_str_punctuation``
         Remove punctuation (', ", ;, !, %, (), [], {}, ...) from a string.
 
-* ``strip_str_symbols``  
+* ``strip_str_symbols``
         Remove symbols (+, =, ~, $, €, ...) from a string.
 
-* ``strip_str_accents``  
+* ``strip_str_accents``
         Remove the accents from the characters of a string.
 
-* ``strip_str``  
+* ``strip_str``
         Keep only letters, numbers, spaces, hyphens and apostrophes in a string.
 
-* ``add_str_suffix``  
+* ``add_str_suffix``
         Append a string to another, while keeping the any trailing '\n'.
 
-* ``str_to_anchor_name``  
+* ``str_to_anchor_name``
         Normalize a string to a standard anchor name.
 
-* ``anchor_name_to_str``  
+* ``anchor_name_to_str``
         Take an anchor and convert it to a human-readable string.
 
-* ``read_file``  
+* ``read_file``
         Read and load the content of a file.
 
-* ``write_file``  
+* ``write_file``
         Write a set of lines into a file.
 
 ..
   _markdown.py.
 
-* ``create_html_anchor``  
-        Take an anchor name and wrap it into an HTML anchor element.
-
-* ``is_html_anchor``  
+* ``check_html_anchor``
         Check that a string is an HTML anchor.
 
-* ``split_md_toc_entry``  
-        Split a Markdown TOC entry into its title and its anchor.
+* ``create_html_anchor``
+        Take an anchor name and wrap it into an HTML anchor element.
 
-* ``build_md_with_toc``  
-        Build the TOC of a Markdown file.
+* ``check_pandoc_anchor``
+        Check that a string contains a Pandoc anchor.
 
-* ``create_md_toc_entry``  
+* ``create_pandoc_anchor``
+        Take an anchor name and wrap it into an HTML anchor element.
+
+* ``clean_md_anchors``
+        Remove the TOC, HTML and Pandoc anchors from Markdown content.
+
+* ``check_md_sec_depth``
+        Check that a string is a Markdown section and that its level is lower than a certain depth.
+
+* ``get_md_list_level``
+        Get the level of a Markdown list entry.
+
+* ``get_md_sec_level``
+        Get the level of a Markdown section title.
+
+* ``check_md_toc_entry``
+        Check that a string is a Markdown TOC entry.
+
+* ``create_md_toc_entry``
         Take a set of (anchor, title) and rewrite into a Markdown TOC entry.
 
-* ``write_md_with_toc``  
+
+
+
+* ``extract_md_section_title``
+        Extract the title of a Markdown section.
+
+
+* ``build_md_with_toc``
+        Build the TOC of a Markdown file.
+
+
+* ``write_md_with_toc``
         Write a text and its TOC in a Markdown file.
 
-* ``add_toc_to_md``  
+* ``add_toc_to_md``
         Open a Markdown file, add HTML anchors to above sections, build the new TOC and write the updated file (TOC, text and anchors).
 
 ..
   _bibtex.py.
 
-* ``sort_bibtex``  
+* ``sort_bibtex``
         Reorganize a BibTeX file in a standardized manner.
 

@@ -110,7 +110,7 @@ def add_str_suffix(string, suffix):
     r""" Append a string to another, while keeping the any trailing '\n'
 
     Take `string` and append `suffix` to it; if `string` had a trailing
-    breaking line '\n', insert `suffix` just before it, so that the new
+    line-breaking '\n', insert `suffix` just before it, so that the new
     string is: string + suffix [+ '\n']
 
     Parameters
@@ -124,7 +124,7 @@ def add_str_suffix(string, suffix):
     -------
     string_app : str
         The string resulting from the concatenation of `string` and
-        `suffix`, with a possible trailing breaking line '\n'.
+        `suffix`, with a possible trailing line-breaking '\n'.
 
     Examples
     --------

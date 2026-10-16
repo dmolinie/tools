@@ -10,6 +10,7 @@ License: GPLv3
 
 import tools as tls
 
+
 #-------------------------   String Manipulation   --------------------------#
 
 # Remove punctuation (', ", ;, !, *, %, (), [], {}, ...) from a string
@@ -49,14 +50,14 @@ md_text_ex = [
     "# TITLE OF THE MARKDOWN\n",
     "\n",
     "## Section 1\n",
-    "Some text for the first line\n",
+    "Some text\n",
     "Some new paragraph\n",
     "\n",
     "### Subsection 1.1\n",
-    "Some additional text\n",
+    "Some text\n",
     "\n",
     "## Section 2\n",
-    "Some additional text\n"]
+    "Some text\n"]
 tls.write_file("file.md", md_text_ex)
 
 # Load the Markdown file
@@ -66,10 +67,10 @@ md_text = tls.read_file("file.md")
 md_text_up, md_toc = tls.build_md_with_toc(md_text, depth=2)
 
 # Write the Markdown with the new HTML anchors and the TOC
-tls.write_mdfile_with_toc("file-toc.md", md_text_up, md_toc)
+tls.write_md_with_toc("file-toc.md", md_text_up, md_toc)
 
 # The three previous steps (read, TOC & write) can be replaced with this one
-tls.add_toc_to_mdfile("file.md", depth=2)
+tls.add_toc_to_md("file.md", depth=2)
 
 #----------------------------------------------------------------------------#
 

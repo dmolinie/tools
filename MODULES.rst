@@ -73,22 +73,17 @@ General purpose functions to handle files, text, Markdown, BibTeX, etc.
 * ``create_md_toc_entry``
         Take a set of (anchor, title) and rewrite into a Markdown TOC entry.
 
-
-
-
 * ``extract_md_section_title``
         Extract the title of a Markdown section.
 
-
 * ``build_md_with_toc``
-        Build the TOC of a Markdown file.
-
+        Build the TOC from the content of a Markdown document.
 
 * ``write_md_with_toc``
-        Write a text and its TOC in a Markdown file.
+        Write a Markdown text content and its TOC in a file.
 
 * ``add_toc_to_md``
-        Open a Markdown file, add HTML anchors to above sections, build the new TOC and write the updated file (TOC, text and anchors).
+        Open a Markdown file, add anchors and links to its sections, build the new TOC and write the updated file (TOC, text, anchors and links).
 
 ..
   _bibtex.py.

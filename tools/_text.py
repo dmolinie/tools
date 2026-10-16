@@ -158,8 +158,8 @@ def str_to_anchor_name(string):
 
     Returns
     -------
-    string_std : str
-        The standardized string.
+    name : str
+        An anchor name as a string stripped from special characters.
 
     Examples
     --------
@@ -215,14 +215,14 @@ def anchor_name_to_str(name):
 
     Examples
     --------
-    >>> print(anc:=str_to_anchor_name("# Presentation of the project"))
+    >>> print(name:=str_to_anchor_name("# Presentation of the project"))
     presentation-of-the-project
-    >>> print(string:=anchor_name_to_str(anc))
+    >>> print(string:=anchor_name_to_str(name))
     Presentation of the project
 
-    >>> print(anc:=str_to_anchor_name("I love cafés!"))
+    >>> print(name:=str_to_anchor_name("I love cafés!"))
     i-love-cafes
-    >>> print(string:=anchor_name_to_str(anc))
+    >>> print(string:=anchor_name_to_str(name))
     'I love cafes'
     """
     return name.replace('-', ' ').capitalize()
